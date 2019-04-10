@@ -12,12 +12,14 @@ app.get('/scrape/:serviceId/:pnrNumber', function(req, res){
 
     const processPromise = checkService(req.params.serviceId, req.params.pnrNumber)
 
-    processPromise.then(
-        result => res.status(200).send(result)
-    ).catch( 
-        error => res.status(400).send(`${error}`)
-    )
+    processPromise
+        .then( result => res.status(200).send(result))
+        .catch( error => res.status(400).send(`${error}`))
 
+})
+
+app.get('/usage', function(req, res){
+    res.send('GET /scrape/{serviceId}/{pnrNumber}')
 })
 
 app.listen(PORT)
