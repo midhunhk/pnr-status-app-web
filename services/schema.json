@@ -1,0 +1,30 @@
+{
+    "version":"1",
+    "status":"",
+    "message":"",
+    "pnrNumber":"",
+    "trainDetails": {
+        "trainNo": "",
+        "trainName": "",
+        "trainFrom": "",
+        "trainTo": ""
+    },
+    "travelDetails": {
+        "boardingPoint": "",
+        "reservedUpto": "",
+        "travelDate": "",
+        "travelDateString": "",
+        "ticketClass": "",
+        "bookingStatus":"",
+        "currentStatus":""
+    },
+    "passengerDetails": [
+        {
+            "name": "passenger1",
+            "seat": "",
+            "status": "",
+            "position":""
+        }
+    ]
+    
+}
