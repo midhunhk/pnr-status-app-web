@@ -1,9 +1,11 @@
 var axios = require('axios');
+var path = require('path')
 
 function getService(serviceId, pnr){
     console.log(`getService ${serviceId}, ${pnr}`)
 
     return new Promise( function(resolve, reject){
+        var service;
         var servicePromise;
         if(serviceId == 1){
             servicePromise = checkWithTrainPnrStatus(pnr)
@@ -11,32 +13,27 @@ function getService(serviceId, pnr){
             servicePromise = checkWithRailYatri(pnr)
         }  else if (serviceId == 3){
             servicePromise = checkWithERail(pnr)
+            service = require('./erails')
         } else if (serviceId == 0){
-            servicePromise = search(pnr)
+            service = require('./search')
         } else {
             reject( `Invalid service id ${serviceId} sepcified.` )
         }
 
-        servicePromise.then(
-            result => resolve(result)
-        ).catch( error => {
-            console.log(`Service Promise Rejected ${error}`)
-            reject( error )
-        })
+        servicePromise = executeService( service.getConfig(pnr) )
+
+        servicePromise
+            .then( result => resolve( service.parseResponse(result) ) )
+            .catch( error => reject( error ) )
     })
 }
 
-function search(string){
+function executeService(config){
     return new Promise( function(resolve, reject) {
-        const url = `https://www.google.ca/search?source=hp&q=${string}`;
-        console.log(`Getting from ${url}`)
-        axios.get(url)
-            .then( response => {
-                resolve(response.data)
-            })
-            .catch(function (error) {
-                reject( error)
-            });
+        
+        axios(config)
+            .then( response => resolve(response.data) )
+            .catch( error => reject( error) )
     })
 }
 
@@ -77,32 +74,6 @@ function checkWithRailYatri(pnrNumber){
 
         console.log("Getting from " + url)
         axios.get(url, config)
-            .then( response => {
-                resolve(response.data)
-            })
-            .catch(function (error) {
-                reject( error)
-            });
-    })
-}
-
-function checkWithERail(pnr){
-    // http://localhost:3000/scrape/3/4356405273
-    return new Promise( function(resolve, reject){
-        //const url = 'https://erail.in/pnr-status/' + pnr
-        const url = 'https://data.tripmgt.com/Data.aspx?Action=PNR_STATUS_RR&Data1=' + pnr + '&t=1554749606601'
-        const config = {
-            headers: {
-                Origin: 'https://erail.in',
-                Referrer: 'https://erail.in/pnr-status/' + pnr,
-                Host: 'erail.in',
-                Cookie: 'm_pnr=' + pnr
-            }
-        }
-        // https://data.tripmgt.com/Data.aspx?Action=PNR_STATUS_RR&Data1=4356405273&t=1554749606601
-        /* https://stackoverflow.com/questions/16209145/how-to-set-cookie-in-node-js-using-express-framework */
-        console.log("Getting from " + url)
-        axios.get(url)
             .then( response => {
                 resolve(response.data)
             })
