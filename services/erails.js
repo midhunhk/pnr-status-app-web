@@ -8,9 +8,20 @@ function getConfig(pnr){
       }
 }
 function parseResponse(response){
-    const responseObj = JSON.parse(response)
     const resultObj = {}
-    resultObj.id = responseObj._id
+    resultObj.id = response._id
+    
+    const pnrData = response.PnrData
+
+    resultObj.status = pnrData.status
+    resultObj.message = pnrData.message
+    
+    const travelData = JSON.parse(response.PnrData + "").data
+    console.log( travelData )
+
+    resultObj.pnrNo = travelData.pnrNo
+    resultObj.noOfPassenger = travelData.noOfPassenger
+
     return resultObj;
 }
 
