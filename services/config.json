@@ -1,0 +1,22 @@
+{
+    "version": "1.0",
+    "name": "service configuration",
+    "services":[ 
+        { 
+            "id": "0", 
+            "name": "serach-service", 
+            "description": "a test service", 
+            "service": "search.js", 
+            "stub": false, 
+            "stub_file": ""
+        }, 
+        { 
+            "id": "3", 
+            "name": "erails", 
+            "desciption": "erails through tripmgt.com", 
+            "service": "erails.js", 
+            "stub": true, 
+            "stub_file": "stubs/erails_response.json"
+        } 
+    ]
+}
