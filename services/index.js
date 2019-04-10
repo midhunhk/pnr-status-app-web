@@ -102,7 +102,7 @@ function checkWithERail(pnr){
         // https://data.tripmgt.com/Data.aspx?Action=PNR_STATUS_RR&Data1=4356405273&t=1554749606601
         /* https://stackoverflow.com/questions/16209145/how-to-set-cookie-in-node-js-using-express-framework */
         console.log("Getting from " + url)
-        axios.get(url, config)
+        axios.get(url)
             .then( response => {
                 resolve(response.data)
             })
