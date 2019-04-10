@@ -1,30 +1,24 @@
-var axios = require('axios');
-var path = require('path')
+const axios = require('axios');
+const path = require('path')
+const fs = require('fs');
+
+const INVALID_SERVICE_ID = "_invalid_service_id_"
+const SERVICE_CONFIG_FILE = './services/config.json'
 
 function getService(serviceId, pnr){
-    console.log(`getService ${serviceId}, ${pnr}`)
 
     return new Promise( function(resolve, reject){
-        var service;
-        var servicePromise;
-
-        // Identiy the requested service and load the service defintions into service
-        if(serviceId == 1){
-            servicePromise = checkWithTrainPnrStatus(pnr)
-        } else if (serviceId == 2){
-            servicePromise = checkWithRailYatri(pnr)
-        }  else if (serviceId == 3){
-            service = require('./erails')
-        } else if (serviceId == 0){
-            service = require('./search')
-        } else {
-            // TODO: move this validation logic to use the config file
+        // Lookup the requested service's definition
+        const serviceConfig = findServiceConfig(serviceId)
+        if(INVALID_SERVICE_ID === serviceConfig){
             reject( `Invalid service id ${serviceId} sepcified.` )
         }
-
+        // Load the service defnition
+        const serviceDefinition = path.join(__dirname, serviceConfig.service)
+        const service = require( serviceDefinition )
+        
         // wrap the HTTP call in a promise with the config for the selected service
-        const serviceConfig = {}
-        servicePromise = executeService( service.getConfig(pnr, serviceConfig) )
+        const servicePromise = executeService( service.getConfig(pnr), serviceConfig )
 
         servicePromise
             .then( result => resolve( service.parseResponse(result) ) )
@@ -34,11 +28,14 @@ function getService(serviceId, pnr){
 
 function executeService(config, serviceConfig){
     return new Promise( function(resolve, reject) {
-        // TODO check if serviceConfig.stub is true and resolve with a stub response
-
-        axios(config)
-            .then( response => resolve(response.data) )
-            .catch( error => reject( error) )
+        if(serviceConfig.stub === true){
+            const stubData = fs.readFileSync( path.join(__dirname, serviceConfig.stub_file) )
+            resolve( stubData.toString() )
+        } else {
+            axios(config)
+                .then( response => resolve(response.data) )
+                .catch( error => reject( error) )
+        }
     })
 }
 
@@ -88,6 +85,17 @@ function checkWithRailYatri(pnrNumber){
                 reject( error)
             });
     })
+}
+
+function findServiceConfig(serviceId){
+    const appConfig =  JSON.parse( fs.readFileSync(SERVICE_CONFIG_FILE) + "" )
+    for(var i = 0; i <appConfig.services.length; i++){
+        var serviceConfig = appConfig.services[i];
+        if(serviceConfig.id == serviceId){
+            return appConfig.services[i]
+        }
+    }
+    return INVALID_SERVICE_ID
 }
 
 module.exports = getService
