@@ -14,7 +14,7 @@ app.get('/scrape/:serviceId/:pnrNumber', function(req, res){
 
     processPromise
         .then( result => res.status(200).send(result))
-        .catch( error => res.status(400).send(`${error}`))
+        .catch( error => res.status(400).send( error ))
 
 })
 
