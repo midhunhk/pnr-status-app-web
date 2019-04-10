@@ -1,2 +1,6 @@
 # pnr-status-app-web
-An in progress Web Component for the next version of pnr-status-app
+This project is an attempt to do get and parse the PNR Status through a web app and expose the results to the PNRStatusApp
+
+
+## References
+[PNRStatusApp](https://github.com/midhunhk/pnr-status-app)
