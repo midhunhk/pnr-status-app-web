@@ -1,3 +1,8 @@
+/**
+ * Service Executor
+ * Executes the specified serviceId to locate the details of the pnr
+ * 
+ */
 const axios = require('axios');
 const path = require('path')
 const fs = require('fs');
@@ -8,6 +13,12 @@ const SERVICE_DISABLED = "_service_disabled_"
 const SERVICE_CONFIG_FILE = './services/config.json'
 const RESPONSE_SCHEMA_VERSION = 1
 
+/**
+ * Loads the service defintion and returns a Promise that resolves the result
+ * 
+ * @param {serviceId} serviceId 
+ * @param {pnr} pnr 
+ */
 function getService(serviceId, pnr){
 
     return new Promise( function(resolve, reject){
@@ -18,9 +29,9 @@ function getService(serviceId, pnr){
         } else if(SERVICE_DISABLED == serviceConfig){
             reject( `Service id ${serviceId} is disabled.` )
         }
-
         // Load the service defnition
         const serviceDefinition = path.join(__dirname, serviceConfig.service)
+        
         const service = require( serviceDefinition )
         
         // wrap the HTTP call in a promise with the config for the selected service
@@ -53,54 +64,6 @@ function executeService(config, serviceConfig){
                 .then( response => resolve(response.data) )
                 .catch( error => reject( error) )
         }
-    })
-}
-
-// Legacy functions
-
-function checkWithTrainPnrStatus(pnrNumber){
-    return new Promise( function(resolve, reject){
-        const postUrl = 'https://www.trainspnrstatus.com/pnrformcheck.php'
-        const config = {
-            headers: {
-                referer: 'https://www.trainspnrstatus.com/',
-                origin: 'https://www.trainspnrstatus.com',
-                host: 'www.trainspnrstatus.com',
-                dnt: '1',
-                scheme: 'https'
-            }
-        }
-        const data = {
-            lccp_pnrno1: pnrNumber
-        }
-        console.log("Posting to " + postUrl)
-        axios.post(postUrl, data, config)
-            .then( response => {
-                resolve(response.data)
-            })
-            .catch(function (error) {
-                reject( error)
-            });
-    })
-}
-
-function checkWithRailYatri(pnrNumber){
-    return new Promise( function(resolve, reject){
-        const url = 'https://www.railyatri.in/pnr-status/' + pnrNumber
-        const config = {
-            headers: {
-                host: 'www.railyatri.in'
-            }
-        }
-
-        console.log("Getting from " + url)
-        axios.get(url, config)
-            .then( response => {
-                resolve(response.data)
-            })
-            .catch(function (error) {
-                reject( error)
-            });
     })
 }
 
