@@ -1,0 +1,11 @@
+{
+	"errorMessage": "",
+	"_id": "5cab8754046ed13e3c3681f6",
+	"Number": "4356405273",
+	"ChartStatus": 0,
+	"JourneyDate": "1900-01-01T00:00:00Z",
+	"JourneyDateString": "01-Jan-1900",
+	"LastUpdated": "2019-04-09T21:35:06Z",
+	"PnrData": "{\"status\":\"FAILURE\",\"message\":\"FLUSHED PNR / PNR NOT YET GENERATED\",\"data\":{\"pnrNo\":null,\"departureDate\":null,\"arrivalDate\":null,\"trainNum\":null,\"trainName\":null,\"stationFrom\":null,\"stationTo\":null,\"reservationUpTo\":null,\"boardingPoint\":null,\"enableHROnSrcStation\":null,\"enableHROnDestStation\":null,\"journeyClass\":null,\"noOfPassenger\":0,\"chartStts\":\"\",\"informationMsg\":null,\"passengerDetailsDTO\":null,\"errorMsg\":\"FLUSHED PNR / PNR NOT YET GENERATED\",\"checkInDateInfo\":null,\"checkOutDateInfo\":null,\"bedTypes\":null,\"isCrisEnabledSrc\":\"true\",\"isCrisEnabledDest\":\"true\"},\"userDetails\":null}",
+	"CollectionName": "PnrStatus"
+}
