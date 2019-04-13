@@ -7,6 +7,7 @@
             "name": "serach-service", 
             "description": "a test service", 
             "service": "search.js", 
+            "enabled" : true,
             "stub": false, 
             "stub_file": ""
         }, 
@@ -15,6 +16,7 @@
             "name": "erails", 
             "desciption": "erails through tripmgt.com", 
             "service": "erails.js", 
+            "enabled" : true,
             "stub": true, 
             "stub_file": "stubs/erails_response.json"
         } 
