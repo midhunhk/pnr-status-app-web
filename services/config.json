@@ -19,6 +19,24 @@
             "enabled" : true,
             "stub": true, 
             "stub_file": "stubs/erails_response.json"
+        }, 
+        { 
+            "id": "1", 
+            "name": "trainpnrstatus", 
+            "desciption": "train pnr status", 
+            "service": "trainpnrstatus.js", 
+            "enabled" : true,
+            "stub": true, 
+            "stub_file": "stubs/trainpnrstatus_response.html"
+        },
+        { 
+            "id": "2", 
+            "name": "serach-service", 
+            "description": "a test service", 
+            "service": "railyatri.js", 
+            "enabled" : true,
+            "stub": true, 
+            "stub_file": "stubs/railyatri_response.html"
         } 
     ]
 }
