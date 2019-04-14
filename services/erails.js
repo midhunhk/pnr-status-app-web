@@ -29,13 +29,18 @@ function getConfig(pnr){
  */
 function parseResponse(response){
     const resultObj = {}
-    const responseJSON = JSON.parse( response)
-    // resultObj.id = responseJSON._id
+    var response;
+
+    if(typeof(response) === 'object'){
+        responseJSON = response; 
+    } else {
+        responseJSON = JSON.parse( response)
+    }
     
     const pnrData = responseJSON.PnrData
     resultObj.status = pnrData.status
     resultObj.message = pnrData.message
-    
+
     const travelData = JSON.parse(responseJSON.PnrData + "").data
 
     resultObj.pnrNo = travelData.pnrNo
@@ -43,8 +48,8 @@ function parseResponse(response){
 
     resultObj.trainDetails = getTrainDetails(travelData)
     resultObj.travelDetails = getTravelDetails(travelData)
-    
-    resultObj.pasengerDetails = getPassengerDetails(travelData.passengerDetailsDTO, resultObj.passengersCount)
+    resultObj.pasengerDetails = getPassengerDetails(travelData.passengerDetailsDTO, 
+            resultObj.passengersCount)
 
     return resultObj
 }
@@ -57,7 +62,7 @@ function getPassengerDetails(passengerData, passengersCount){
         passengerInfo.name = "Passenger " + (i +1)
         passengerInfo.seat = "seat"
         passengerInfo.status = responseData.seatStts
-        passengerInfo.quota = response.quotaCode
+        passengerInfo.quota = responseData.quotaCode
         passengerDetails.push(passengerInfo)
     }
     return passengerDetails

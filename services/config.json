@@ -17,7 +17,7 @@
             "desciption": "erails through tripmgt.com", 
             "service": "erails.js", 
             "enabled" : true,
-            "stub": true, 
+            "stub": false, 
             "stub_file": "stubs/erails_response.json"
         }, 
         { 
@@ -26,7 +26,7 @@
             "desciption": "train pnr status", 
             "service": "trainpnrstatus.js", 
             "enabled" : true,
-            "stub": true, 
+            "stub": false, 
             "stub_file": "stubs/trainpnrstatus_response.html"
         },
         { 
@@ -35,7 +35,7 @@
             "description": "a test service", 
             "service": "railyatri.js", 
             "enabled" : true,
-            "stub": true, 
+            "stub": false, 
             "stub_file": "stubs/railyatri_response.html"
         } 
     ]
