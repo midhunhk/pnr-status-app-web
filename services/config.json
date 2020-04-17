@@ -4,7 +4,7 @@
     "services":[ 
         { 
             "id": "0", 
-            "name": "serach-service", 
+            "name": "search-service", 
             "description": "a test service", 
             "service": "search.js", 
             "enabled" : true,
