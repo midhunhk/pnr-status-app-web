@@ -41,6 +41,7 @@ function getService(serviceId, pnr){
                 const responseJSON = service.parseResponse(result);
                 responseJSON.version = RESPONSE_SCHEMA_VERSION
                 responseJSON.status = "READY"
+                responseJSON.service = service.name
                 resolve( responseJSON ) 
             })
             .catch( error => {
