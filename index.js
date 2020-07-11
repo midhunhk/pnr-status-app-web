@@ -2,7 +2,7 @@ const express = require('express');
 const app     = express();
 const cookieParser = require('cookie-parser')
 const checkService = require('./services/index');
-const PORT = '3000'
+const PORT = process.env.PORT || '3000'
 
 app.use(cookieParser())
 
