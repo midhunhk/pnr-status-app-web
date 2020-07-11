@@ -12,23 +12,15 @@
             "stub_file": ""
         }, 
         { 
-            "id": "3", 
-            "name": "erails", 
-            "desciption": "erails through tripmgt.com", 
-            "service": "erails.js", 
-            "enabled" : true,
-            "stub": false, 
-            "stub_file": "stubs/erails_response.json"
-        }, 
-        { 
             "id": "1", 
             "name": "trainpnrstatus", 
             "desciption": "train pnr status", 
             "service": "trainpnrstatus.js", 
-            "enabled" : true,
+            "enabled" : false,
             "stub": false, 
-            "stub_file": "stubs/trainpnrstatus_response.html"
-        },
+            "stub_file": "stubs/trainpnrstatus_response.html",
+            "description": "bad response when executing this service"
+        }, 
         { 
             "id": "2", 
             "name": "serach-service", 
@@ -37,6 +29,15 @@
             "enabled" : true,
             "stub": true, 
             "stub_file": "stubs/railyatri_response.html"
-        } 
+        },
+        { 
+            "id": "3", 
+            "name": "erails", 
+            "desciption": "erails through tripmgt.com", 
+            "service": "erails.js", 
+            "enabled" : true,
+            "stub": false, 
+            "stub_file": "stubs/erails_response.json"
+        }
     ]
 }
