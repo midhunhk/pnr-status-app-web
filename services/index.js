@@ -25,13 +25,12 @@ function getService(serviceId, pnr){
         // Lookup the requested service's definition
         const serviceConfig = findServiceConfig(serviceId)
         if(INVALID_SERVICE_ID === serviceConfig){
-            reject( `Invalid service id ${serviceId} sepcified.` )
+            reject( `Service id ${serviceId} is invalid.` )
         } else if(SERVICE_DISABLED == serviceConfig){
             reject( `Service id ${serviceId} is disabled.` )
         }
-        // Load the service defnition
+        // Dynamically load the service defnition
         const serviceDefinition = path.join(__dirname, serviceConfig.service)
-        
         const service = require( serviceDefinition )
         
         // wrap the HTTP call in a promise with the config for the selected service
@@ -54,6 +53,12 @@ function getService(serviceId, pnr){
     })
 }
 
+/**
+ * Returns a Promise which executes the service with the config data passed in
+ * 
+ * @param {config} config 
+ * @param {serviceConfig} serviceConfig 
+ */
 function executeService(config, serviceConfig){
     return new Promise( function(resolve, reject) {
         if(serviceConfig.stub === true){
@@ -67,6 +72,11 @@ function executeService(config, serviceConfig){
     })
 }
 
+/**
+ * Loads the configuration data for a given serviceId
+ * 
+ * @param {serviceId} serviceId 
+ */
 function findServiceConfig(serviceId){
     const appConfig =  JSON.parse( fs.readFileSync(SERVICE_CONFIG_FILE) + "" )
     for(var i = 0; i <appConfig.services.length; i++){
