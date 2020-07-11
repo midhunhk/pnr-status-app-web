@@ -6,6 +6,10 @@ const PORT = process.env.PORT || '3000'
 
 app.use(cookieParser())
 
+app.get('/', function(req, res){
+  res.send("Hello Universe!")  
+})
+
 app.get('/scrape/:serviceId/:pnrNumber', function(req, res){
 
     console.log('/scrape serviceId:' + req.params.serviceId + '; pnrNumber:' + req.params.pnrNumber)
@@ -22,8 +26,8 @@ app.get('/usage', function(req, res){
     res.send('GET /scrape/{serviceId}/{pnrNumber}')
 })
 
-app.listen(PORT)
-
-console.log(`Running on port ${PORT}`);
+app.listen(PORT, () => {
+    console.log(`Running on port ${PORT}`);
+})
 
 exports = module.exports = app;
