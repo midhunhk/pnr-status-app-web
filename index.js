@@ -10,9 +10,9 @@ app.get('/', function(req, res){
   res.send("Hello Universe!")  
 })
 
-app.get('/scrape/:serviceId/:pnrNumber', function(req, res){
+app.get('/pnrstatus/:serviceId/:pnrNumber', function(req, res){
 
-    console.log('/scrape serviceId:' + req.params.serviceId + '; pnrNumber:' + req.params.pnrNumber)
+    console.log('/pnrstatus serviceId:' + req.params.serviceId + '; pnrNumber:' + req.params.pnrNumber)
 
     const processPromise = checkService(req.params.serviceId, req.params.pnrNumber)
 
@@ -23,7 +23,7 @@ app.get('/scrape/:serviceId/:pnrNumber', function(req, res){
 })
 
 app.get('/usage', function(req, res){
-    res.send('GET /scrape/{serviceId}/{pnrNumber}')
+    res.send('GET /pnrstatus/{serviceId}/{pnrNumber}')
 })
 
 app.listen(PORT, () => {

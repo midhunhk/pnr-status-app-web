@@ -1,7 +1,7 @@
 {
-  "name": "scraper",
-  "version": "0.2.0",
-  "description": "a scraper for pnr status app",
+  "name": "pnrstatus",
+  "version": "0.3.0",
+  "description": "A web API for pnr status app",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
