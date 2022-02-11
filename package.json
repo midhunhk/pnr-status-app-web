@@ -1,6 +1,6 @@
 {
   "name": "pnrstatus",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A web API for pnr status app",
   "main": "index.js",
   "scripts": {
