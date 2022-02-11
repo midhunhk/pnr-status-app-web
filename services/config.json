@@ -23,7 +23,7 @@
         }, 
         { 
             "id": "2", 
-            "name": "serach-service", 
+            "name": "rail-yatri", 
             "description": "a test service", 
             "service": "railyatri.js", 
             "enabled" : true,
