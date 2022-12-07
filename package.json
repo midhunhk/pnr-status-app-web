@@ -20,7 +20,7 @@
     "webpack": "^5.68.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4",
+    "nodemon": "^2.0.20",
     "webpack-cli": "^4.9.2"
   },
   "engines": {
