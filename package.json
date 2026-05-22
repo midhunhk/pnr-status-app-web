@@ -16,7 +16,7 @@
     "axios": "^1.15.2",
     "cheerio": "^1.0.0-rc.10",
     "cookie-parser": "^1.4.7",
-    "express": "^4.22.1",
+    "express": "^4.22.2",
     "webpack": "^5.105.0"
   },
   "devDependencies": {
